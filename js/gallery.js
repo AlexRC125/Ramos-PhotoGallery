@@ -51,7 +51,7 @@ var mImages = [];
 
 // Holds the retrived JSON information
 var mJson;
-
+const obj = JSON.parse();
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
 var mUrl = 'images.json';
@@ -97,9 +97,14 @@ function fetchJSON(){
 	mRequest.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 		   // Typical action to be performed when the document is ready:
-		   document.getElementById("demo").innerHTML = mRequest.responseText;
+		   mJson = JSON.parse(mRequest.responseText);
+		   iterateJSON()
 		}
 	};
 	mRequest.open("GET", mUrl, true);
 	mRequest.send();
+}
+
+function iterateJSON(){
+mJson.forEach(mJson)
 }
