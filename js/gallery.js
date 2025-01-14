@@ -106,5 +106,6 @@ function fetchJSON(){
 }
 
 function iterateJSON(){
-mJson.forEach(mJson)
+mJson.forEach()
+
 }
