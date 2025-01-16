@@ -93,19 +93,34 @@ this.img = img;
 
 }
 
-function fetchJSON(){
-	mRequest.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-		   // Typical action to be performed when the document is ready:
-		   mJson = JSON.parse(mRequest.responseText);
-		   iterateJSON()
-		}
-	};
-	mRequest.open("GET", mUrl, true);
-	mRequest.send();
+function iterateJSON() {
+    mJson.images.forEach((imageData) => {
+        let galleryImage = new GalleryImage(
+            imageData.imgLocation, 
+            imageData.description,   
+            imageData.date,          
+            imageData.imgPath                      
+        );
+
+        mImages.push(galleryImage);
+    });
+
 }
 
-function iterateJSON(){
-mJson.forEach()
+function swapPhoto() {
+    if (mImages.length > 0) {
+        const slideShow = document.getElementById("slideShow");
+        const image = mImages[mCurrentIndex];
+        
+        if (slideShow && image) {
+            slideShow.src = image.img;
+            console.log(`Swapping photo: ${image.description}`);
+            
+            $('.details .location').text(image.location);
+            $('.details .description').text(image.description);
+            $('.details .date').text(image.date);
+        }
 
+        mCurrentIndex = (mCurrentIndex + 1) % mImages.length;
+    }
 }
